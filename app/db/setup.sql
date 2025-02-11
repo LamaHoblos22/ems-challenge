@@ -1,3 +1,31 @@
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS timesheets;
+
+-- Create employees table
+CREATE TABLE employees (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name TEXT NULL,
+    email TEXT NOT NULL UNIQUE,            -- Unique email for each employee
+    phone_number TEXT,                     -- Optional phone number
+    hire_date DATE NOT NULL,               -- Date of hire
+    job_title TEXT,                        -- Employee's job title
+    department TEXT,                       -- Department the employee belongs to
+    salary INTEGER,                        -- Employee's salary (numeric)
+    date_of_birth DATE,                    -- Employee's date of birth
+    address TEXT                           -- Employee's address (optional)
+);
+
+-- Create timesheets table
+CREATE TABLE timesheets (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    start_time DATETIME NOT NULL,          -- Start time of the timesheet
+    end_time DATETIME NOT NULL,            -- End time of the timesheet
+    employee_id INTEGER NOT NULL,          -- ID of the employee from the employees table
+    hours_worked REAL NOT NULL,            -- Number of hours worked in the shift
+    project_name TEXT,                     -- Optional project or task worked on
+    FOREIGN KEY (employee_id) REFERENCES employees(id)
+);
+
 -- This file contains the SQL schema, it drops all tables and recreates them
 
 DROP TABLE IF EXISTS employees;
